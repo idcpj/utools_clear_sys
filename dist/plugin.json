@@ -1,0 +1,24 @@
+{
+  "name": "clear_sys",
+  "pluginName": "空间清理专家",
+  "description": "面向开发者和极客的轻量级、跨平台磁盘空间清理工具",
+  "author": "idcpj",
+  "homepage": "https://www.github.com/idcpj",
+  "version": "1.0.0",
+  "logo": "logo.png",
+  "main": "index.html",
+  "preload": "preload.js",
+  "features": [
+    {
+      "code": "clear_sys",
+      "explain": "清理缓存及系统无用文件，释放磁盘空间",
+      "cmds": [
+        "清理",
+        "clean",
+        "disk",
+        "clear",
+        "容量"
+      ]
+    }
+  ]
+}

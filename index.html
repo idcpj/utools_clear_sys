@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>空间清理专家</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="header-top">
+        <div class="header-title">
+          <h1>系统空间清理</h1>
+          <p>专业级系统冗余与大文件清理工具</p>
+        </div>
+        <div class="header-stats">
+          <div class="stat-item">
+            <div class="stat-label">当前视图发现</div>
+            <div class="stat-value highlight" id="total-scannable">0 B</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">将要清理</div>
+            <div class="stat-value" id="total-selected">0 B</div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" data-target="cache-view">常规缓存</div>
+        <div class="tab" data-target="large-files-view">大文件扫描</div>
+      </div>
+    </header>
+
+    <main class="content">
+      <!-- 视图 1：缓存清理 -->
+      <div id="cache-view" class="view-container active">
+        <div class="toolbar">
+          <label class="filter-label">排序方式：
+            <select id="cache-sort" class="native-select">
+              <option value="size" selected>按大小排序</option>
+              <option value="checked">按选中状态排序</option>
+            </select>
+          </label>
+        </div>
+        <div class="list-header">
+          <div class="cell-check">
+            <input type="checkbox" id="select-all" class="native-checkbox" checked>
+          </div>
+          <div class="cell-info">清理项目</div>
+          <div class="cell-size">大小</div>
+        </div>
+        <div id="rules-container" class="scrollable-container">
+          <!-- JS 注入规则 -->
+        </div>
+      </div>
+
+      <!-- 视图 2：大文件扫描 -->
+      <div id="large-files-view" class="view-container">
+        <div class="toolbar">
+          <label class="filter-label">过滤阈值：
+            <select id="lf-threshold" class="native-select">
+              <option value="50">大于 50MB</option>
+              <option value="100" selected>大于 100MB</option>
+              <option value="500">大于 500MB</option>
+              <option value="1024">大于 1GB</option>
+            </select>
+          </label>
+          <button class="native-btn secondary" id="scan-lf-btn">
+            <span class="spinner-btn" id="lf-scan-spinner" style="display: none; border-top-color: var(--accent-color);"></span>
+            开始全盘扫描
+          </button>
+        </div>
+        <div class="list-header">
+          <div class="cell-check">
+            <input type="checkbox" id="lf-select-all" class="native-checkbox">
+          </div>
+          <div class="cell-info">文件路径</div>
+          <div class="cell-size">大小</div>
+        </div>
+        <div id="lf-container" class="scrollable-container">
+          <div class="empty-state">
+            <div class="empty-icon">📂</div>
+            <p>点击上方“开始全盘扫描”查找系统（下载/影片/文档/桌面）中的冗余大文件。</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <button class="native-btn" id="clean-btn" disabled>
+        <span class="spinner-btn" id="clean-spinner" style="display: none;"></span>
+        <span class="btn-text">清理选中项</span>
+      </button>
+    </footer>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
