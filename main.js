@@ -86,6 +86,34 @@ const CACHE_RULES = [
   { id: 'adobe-cache', name: 'Adobe Media Cache', path: 'Library/Application Support/Adobe/Common/Media Cache Files', description: 'Adobe 视频缓存', checked: true, platforms: ['darwin'] },
   { id: 'epic-games', name: 'Epic Games Cache', path: 'Library/Caches/com.epicgames.EpicGamesLauncher', description: 'Epic Games 启动器缓存', checked: false, platforms: ['darwin'] },
   { id: 'steam-cache', name: 'Steam Cache', path: 'Library/Application Support/Steam/appcache', description: 'Steam 应用缓存', checked: false, platforms: ['darwin'] },
+  // Windows Deep System
+  { id: 'win-sys32-logs', name: 'System32 LogFiles', path: 'C:/Windows/System32/LogFiles', description: 'Windows 核心日志文件', checked: false, absolute: true, platforms: ['win32'] },
+  { id: 'win-sys-logs', name: 'Windows Logs', path: 'C:/Windows/Logs', description: 'Windows 综合日志', checked: false, absolute: true, platforms: ['win32'] },
+  { id: 'win-offline-web', name: 'Offline Web Pages', path: 'C:/Windows/Offline Web Pages', description: '旧版离线网页缓存', checked: false, absolute: true, platforms: ['win32'] },
+  { id: 'win-wer-archive', name: 'Windows Error Reports', path: 'C:/ProgramData/Microsoft/Windows/WER/ReportArchive', description: 'Windows 错误报告存档', checked: false, absolute: true, platforms: ['win32'] },
+  { id: 'win-crash-dumps', name: 'Crash Dumps', path: 'AppData/Local/CrashDumps', description: '应用程序崩溃转储文件', checked: false, platforms: ['win32'] },
+  { id: 'win-inet-cache', name: 'Windows INetCache', path: 'AppData/Local/Microsoft/Windows/INetCache', description: 'Windows Internet 核心缓存', checked: true, platforms: ['win32'] },
+  { id: 'win-explorer-cache', name: 'Explorer Thumbnails', path: 'AppData/Local/Microsoft/Windows/Explorer', description: '资源管理器缩略图及图标缓存', checked: false, platforms: ['win32'] },
+  
+  // GPU Shader Caches
+  { id: 'gpu-nvidia-dx', name: 'NVIDIA DXCache', path: 'AppData/Local/NVIDIA/DXCache', description: 'NVIDIA DirectX 着色器缓存 (删除安全但重进游戏需重编译)', checked: false, platforms: ['win32'] },
+  { id: 'gpu-nvidia-gl', name: 'NVIDIA GLCache', path: 'AppData/Local/NVIDIA/GLCache', description: 'NVIDIA OpenGL 着色器缓存', checked: false, platforms: ['win32'] },
+  { id: 'gpu-amd-dx', name: 'AMD DxCache', path: 'AppData/Local/AMD/DxCache', description: 'AMD DirectX 着色器缓存', checked: false, platforms: ['win32'] },
+  { id: 'gpu-amd-gl', name: 'AMD GLCache', path: 'AppData/Local/AMD/GLCache', description: 'AMD OpenGL 着色器缓存', checked: false, platforms: ['win32'] },
+
+  // Extended Dev Tools
+  { id: 'vscode-ext-cache', name: 'VS Code Ext Cache', path: 'AppData/Roaming/Code/CachedExtensionVSIXs', description: 'VS Code 插件安装包缓存', checked: true, platforms: ['win32'] },
+  { id: 'vscode-workspace', name: 'VS Code Workspace', path: 'AppData/Roaming/Code/User/workspaceStorage', description: 'VS Code 工作区存储 (删除会丢失未保存状态和本地历史)', checked: false, platforms: ['win32'] },
+
+  // Extended Browser & App Code Caches
+  { id: 'brave-cache', name: 'Brave Cache', path: 'AppData/Local/BraveSoftware/Brave-Browser/User Data/Default/Cache', description: 'Brave 浏览器缓存', checked: true, platforms: ['win32'] },
+  { id: 'brave-code-cache', name: 'Brave Code Cache', path: 'AppData/Local/BraveSoftware/Brave-Browser/User Data/Default/Code Cache', description: 'Brave 浏览器代码缓存', checked: true, platforms: ['win32'] },
+  { id: 'chrome-code-cache', name: 'Chrome Code Cache', path: 'AppData/Local/Google/Chrome/User Data/Default/Code Cache', description: 'Google Chrome 代码缓存', checked: true, platforms: ['win32'] },
+  { id: 'edge-code-cache', name: 'Edge Code Cache', path: 'AppData/Local/Microsoft/Edge/User Data/Default/Code Cache', description: 'Microsoft Edge 代码缓存', checked: true, platforms: ['win32'] },
+  
+  { id: 'epic-http-cache', name: 'Epic Http Cache', path: 'AppData/Local/EpicGamesLauncher/Saved/HttpCache', description: 'Epic 平台网页缓存', checked: true, platforms: ['win32'] },
+  { id: 'steam-html-cache', name: 'Steam HTML Cache', path: 'AppData/Local/Steam/htmlcache', description: 'Steam 客户端内置网页缓存', checked: true, platforms: ['win32'] },
+  { id: 'discord-code-cache', name: 'Discord Code Cache', path: 'AppData/Roaming/discord/Code Cache', description: 'Discord 运行时代码缓存', checked: true, platforms: ['win32'] },
 
   // Mac System Heavy Hogs
   { id: 'ios-backups', name: 'iOS Backups', path: 'Library/Application Support/MobileSync/Backup', description: '本地 iPhone/iPad 备份数据 (通常占用极大，请谨慎)', checked: false, platforms: ['darwin'] },
