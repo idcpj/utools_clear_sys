@@ -72,6 +72,23 @@ const trashPath = (targetPath) => {
   });
 };
 
+const showItemInFolder = (targetPath) => {
+  if (window.utools && window.utools.shellShowItemInFolder) {
+    window.utools.shellShowItemInFolder(targetPath);
+  } else {
+    const { shell } = require('electron');
+    shell.showItemInFolder(targetPath);
+  }
+};
+
+const isDirectory = (targetPath) => {
+  try {
+    return fs.statSync(targetPath).isDirectory();
+  } catch (e) {
+    return false;
+  }
+};
+
 const pathExists = (targetPath) => {
     return fs.existsSync(targetPath);
 };
@@ -145,5 +162,7 @@ window.services = {
   pathExists,
   scanLargeFiles,
   resolvePath: (...paths) => path.resolve(...paths),
-  getPlatform: () => os.platform()
+  getPlatform: () => os.platform(),
+  showItemInFolder,
+  isDirectory
 };

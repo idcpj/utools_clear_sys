@@ -125,7 +125,62 @@ const resolveFullPath = (relPath, absolute) => {
   return window.services.resolvePath(getHomePath(), relPath);
 };
 
+let activeContextItem = null;
+
+const initContextMenu = () => {
+  const menu = document.getElementById('context-menu');
+  const openFolderBtn = document.getElementById('menu-open-folder');
+  if (!menu || !openFolderBtn) return;
+
+  document.addEventListener('click', () => {
+    menu.classList.remove('active');
+    menu.style.display = ''; // Clear inline display style
+  });
+
+  openFolderBtn.addEventListener('click', () => {
+    if (activeContextItem && window.services && window.services.showItemInFolder) {
+      window.services.showItemInFolder(activeContextItem);
+    }
+    menu.classList.remove('active');
+    menu.style.display = ''; // Clear inline display style
+  });
+};
+
+const showContextMenu = (e, path) => {
+  e.preventDefault();
+  activeContextItem = path;
+  
+  const menu = document.getElementById('context-menu');
+  const openFolderBtn = document.getElementById('menu-open-folder');
+  if (!menu || !openFolderBtn) return;
+  
+  if (window.services && window.services.isDirectory) {
+    if (window.services.isDirectory(path)) {
+      openFolderBtn.textContent = '打开目录';
+    } else {
+      openFolderBtn.textContent = '打开文件所在目录';
+    }
+  }
+
+  menu.classList.add('active');
+  
+  let left = e.clientX;
+  let top = e.clientY;
+  
+  const rect = menu.getBoundingClientRect();
+  if (left + rect.width > window.innerWidth) {
+    left = window.innerWidth - rect.width;
+  }
+  if (top + rect.height > window.innerHeight) {
+    top = window.innerHeight - rect.height;
+  }
+  
+  menu.style.left = `${left}px`;
+  menu.style.top = `${top}px`;
+};
+
 const initApp = async () => {
+  initContextMenu();
   initTabs();
   initCaches();
   initLargeFiles();
@@ -243,6 +298,9 @@ const renderCacheList = () => {
           updateGlobalStats();
         }
       });
+      row.addEventListener('contextmenu', (e) => {
+        showContextMenu(e, item.fullPath);
+      });
       row.querySelector('input').addEventListener('change', (e) => {
         item.checked = e.target.checked;
         renderCacheList();
@@ -354,6 +412,9 @@ const renderLargeFilesList = () => {
           renderLargeFilesList(); 
           updateGlobalStats();
         }
+      });
+      row.addEventListener('contextmenu', (e) => {
+        showContextMenu(e, item.path);
       });
       row.querySelector('input').addEventListener('change', (e) => {
         item.checked = e.target.checked;
